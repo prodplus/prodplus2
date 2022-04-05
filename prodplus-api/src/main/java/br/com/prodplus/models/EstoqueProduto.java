@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import br.com.prodplus.models.enums.TipoEntrada;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,8 +32,8 @@ public class EstoqueProduto extends Estoque {
 
 	@Builder
 	public EstoqueProduto(Integer id, LocalDateTime data, Double quantidade, Double entrada,
-			Produto produto) {
-		super(id, data, quantidade, entrada);
+			TipoEntrada tipo, Produto produto) {
+		super(id, data, quantidade, entrada, tipo);
 		this.setProduto(produto);
 	}
 

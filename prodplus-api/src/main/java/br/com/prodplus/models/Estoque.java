@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import br.com.prodplus.models.enums.TipoEntrada;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +39,9 @@ public class Estoque implements Serializable, Comparable<Estoque> {
 	private Double quantidade;
 	@Column(nullable = false)
 	private Double entrada;
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 20)
+	private TipoEntrada tipo;
 
 	@Override
 	public int compareTo(Estoque o) {

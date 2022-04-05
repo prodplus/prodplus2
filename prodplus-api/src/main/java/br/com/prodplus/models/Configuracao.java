@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.prodplus.models.auxiliares.Turno;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,6 +34,7 @@ public class Configuracao implements Serializable {
 
 	private static final long serialVersionUID = -4172693040286698727L;
 	@Id
+	@JsonIgnore
 	private Integer id;
 	@ElementCollection
 	@LazyCollection(LazyCollectionOption.FALSE)
