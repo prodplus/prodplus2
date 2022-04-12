@@ -10,6 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 import br.com.prodplus.models.enums.TipoProcesso;
 import lombok.AllArgsConstructor;
@@ -35,11 +38,15 @@ public class Processo implements Serializable {
 	private Integer id;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
+	@NotNull(message = "o tipo do processo é obrigatório!")
 	private TipoProcesso tipo;
 	@Column(nullable = false, unique = true)
+	@NotBlank(message = "a descrição é obrigatória!")
 	private String descricao;
+	@PositiveOrZero(message = "custo inválido!")
 	private BigDecimal custoAdicional;
 	@Column(nullable = false)
+	@NotNull(message = "campo obrigatório!")
 	private boolean ativo = true;
 
 	@Override

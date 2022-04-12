@@ -10,6 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 import br.com.prodplus.models.enums.Periodo;
 import lombok.AllArgsConstructor;
@@ -34,13 +37,18 @@ public class Custo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(nullable = false, unique = true)
+	@NotBlank(message = "a descrição é obrigatória!")
 	private String descricao;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
+	@NotNull(message = "o período é obrigatório!")
 	private Periodo periodo;
 	@Column(nullable = false)
+	@NotNull(message = "o valor é obrigatório!")
+	@PositiveOrZero(message = "valor inválido!")
 	private BigDecimal valor;
 	@Column(nullable = false)
+	@NotNull(message = "campo obrigatório")
 	private boolean ativo = true;
 
 	@Override

@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -46,7 +47,9 @@ public class Configuracao implements Serializable {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private Set<Turno> turnosDomingo = new HashSet<>();
 	@Column(nullable = false)
+	@NotNull(message = "campo obrigatório!")
 	private boolean estruturaCompleta = false;
+	@NotNull(message = "campo obrigatório!")
 	private Double mediaIpcm = 0.0;
 
 }

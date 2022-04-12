@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +25,13 @@ public class DemandaId implements Serializable, Comparable<DemandaId> {
 
 	private static final long serialVersionUID = 3022282564380011543L;
 	@Column(nullable = false)
+	@NotNull(message = "o produto é obrigatório!")
 	private Integer produto;
 	@Column(nullable = false)
+	@NotNull(message = "o ano é obrigatório!")
 	private Integer ano;
 	@Column(nullable = false)
+	@NotNull(message = "a semana é obrigatória!")
 	private Integer semana;
 
 	@Override

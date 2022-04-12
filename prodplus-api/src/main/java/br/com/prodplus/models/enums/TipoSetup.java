@@ -7,6 +7,6 @@ package br.com.prodplus.models.enums;
  */
 public enum TipoSetup {
 
-	CICLICO, ACICLICO, FINALIZACAO;
+	NORMAL, CICLICO, ACICLICO, FINALIZACAO;
 
 }

@@ -7,6 +7,5 @@ package br.com.prodplus.models.enums;
  */
 public enum PeriodoSetup {
 
-	PERIODO, TURNO, DIA;
-
+	TURNO, DIA, MANUAL, NENHUM;
 }

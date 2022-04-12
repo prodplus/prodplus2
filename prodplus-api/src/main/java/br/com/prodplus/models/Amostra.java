@@ -10,6 +10,9 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
@@ -40,40 +43,60 @@ public class Amostra implements Serializable, Comparable<Amostra> {
 	private static final long serialVersionUID = 6380777644172113331L;
 	@EmbeddedId
 	private AmostraId id;
+	@Column(nullable = false)
+	@PositiveOrZero(message = "tempo tolerância inválido!")
+	@NotNull(message = "o tempo de tolerância é inválido!")
+	private Integer tempoTolerancia;
 	@ElementCollection
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Integer> temposMedidos = new ArrayList<>();
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
+	@NotNull(message = "o período de setup é obrigatório!")
 	private PeriodoSetup periodoSetup;
+	@ElementCollection
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Integer> setups = new ArrayList<>();
 	@ElementCollection
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Integer> setupsCiclicos = new ArrayList<>();
 	@Column(nullable = false)
+	@NotNull(message = "o período é obrigatório!")
+	@PositiveOrZero(message = "período inválido!")
 	private Integer periodo = 0;
 	@ElementCollection
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Integer> setupsAciclicos = new ArrayList<>();
 	@Column(nullable = false)
+	@NotNull(message = "a quantidade acíclica é obrigatória!")
+	@PositiveOrZero(message = "quantidade acíclica inválida!")
 	private Integer quantidadeAciclica = 0;
 	@ElementCollection
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Integer> finalizacoesMedidas = new ArrayList<>();
 	@Column(nullable = false)
+	@NotNull(message = "a quantidade finalização é obrigatória!")
+	@PositiveOrZero(message = "quantidade finalização inválida!")
 	private Integer quantidadeFinalizacao = 0;
 	@Column(nullable = false)
+	@NotNull(message = "a batelada é obrigatória!")
+	@Positive(message = "batelada inválida!")
 	private Double batelada;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
+	@NotNull(message = "a habilidade é obrigatória!")
 	private Habilidade habilidade;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
+	@NotNull(message = "o esforço é obrigatório!")
 	private Esforco esforco;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
+	@NotNull(message = "a condição é obrigatória!")
 	private Condicao condicao;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
+	@NotNull(message = "a consistência é obrigatória!")
 	private Consistencia consistencia;
 
 	@Override

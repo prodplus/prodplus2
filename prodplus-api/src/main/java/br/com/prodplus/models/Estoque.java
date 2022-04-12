@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 import br.com.prodplus.models.enums.TipoEntrada;
 import lombok.AllArgsConstructor;
@@ -34,13 +35,17 @@ public class Estoque implements Serializable, Comparable<Estoque> {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(nullable = false)
+	@NotNull(message = "a data é obrigatória!")
 	private LocalDateTime data;
 	@Column(nullable = false)
+	@NotNull(message = "a quantidade é obrigatória!")
 	private Double quantidade;
 	@Column(nullable = false)
+	@NotNull(message = "a entrada é obrigatória!")
 	private Double entrada;
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 20)
+	@NotNull(message = "o tipo é obrigatório!")
 	private TipoEntrada tipo;
 
 	@Override

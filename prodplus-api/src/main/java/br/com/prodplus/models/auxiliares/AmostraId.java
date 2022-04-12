@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +25,10 @@ public class AmostraId implements Serializable, Comparable<AmostraId> {
 
 	private static final long serialVersionUID = -6505657622938784878L;
 	@Column(nullable = false)
+	@NotNull(message = "campo obrigatório!")
 	private Integer produto;
 	@Column(nullable = false)
+	@NotNull(message = "campo obrigatório!")
 	private Integer processo;
 
 	@Override
