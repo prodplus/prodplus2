@@ -57,7 +57,7 @@ public class PrevisaoNeural {
 		PRODUTO = produto;
 		List<DemandaPrev> previstas = new ArrayList<>();
 		List<DemandaPrev> futuras = retornaFuturas();
-		String file_name = String.format("%s%04d%04d%02d%s", PRODUTO.getId(),
+		String file_name = String.format("treinamento%04d%04d%02d%s", PRODUTO.getId(),
 				futuras.get(0).getId().getAno(), futuras.get(0).getId().getSemana(), ".eg");
 		File arquivo = new File(file_name);
 		List<DemandaExec> filtradas = demandas.stream().filter(d -> d.getQuantidade() != null)
@@ -74,7 +74,7 @@ public class PrevisaoNeural {
 			quantidadesCadastradas[i] = filtradas.get(i).getQuantidade();
 		}
 
-		BasicNetwork network = createNetwork(new int[] { 2, 4, 1 });
+		BasicNetwork network = createNetwork(new int[] { 2, 4, 4, 1 });
 		MLDataSet treino = trainGenerator(filtradas);
 		train(network, treino, arquivo);
 		previstas.addAll(prediction(network, treino, futuras, filtradas));
@@ -123,7 +123,7 @@ public class PrevisaoNeural {
 		TemporalMLDataSet result = new TemporalMLDataSet(2, 1);
 		List<TemporalDataDescription> descriptions = new ArrayList<>();
 
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 2; i++)
 			descriptions.add(
 					new TemporalDataDescription(TemporalDataDescription.Type.RAW, true, false));
 		descriptions.add(new TemporalDataDescription(TemporalDataDescription.Type.RAW, true, true));

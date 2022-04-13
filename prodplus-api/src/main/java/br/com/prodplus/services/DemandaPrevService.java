@@ -109,6 +109,8 @@ public class DemandaPrevService {
 		try {
 			Produto produto = this.produtoService.buscar(idProduto);
 			List<DemandaExec> demandas = this.demandaService.listar(idProduto);
+			demandas = demandas.stream().filter(d -> d.getQuantidade() != null)
+					.collect(Collectors.toList());
 			return PrevisaoNeural.previsao(demandas, produto);
 		} catch (Exception e) {
 			e.printStackTrace();
