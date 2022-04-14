@@ -1,3 +1,5 @@
+import { TIPO_PROCESSO } from './enums';
+
 export class Processo {
   id: number | null;
   tipo: string;
@@ -16,7 +18,7 @@ export class Processo {
   constructor(...args: any[]) {
     if (args.length == 0) {
       this.id = null;
-      this.tipo = '';
+      this.tipo = TIPO_PROCESSO[0];
       this.descricao = '';
       this.custoAdicional = 0;
       this.ativo = true;

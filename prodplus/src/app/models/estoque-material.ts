@@ -1,4 +1,5 @@
 import { toDateApi } from '../shared/date-utils';
+import { TIPO_ENTRADA } from './enums';
 import { Material } from './material';
 
 export class EstoqueMaterial {
@@ -15,7 +16,8 @@ export class EstoqueMaterial {
     quantidade: number,
     entrada: number,
     tipo: string,
-    material: Material
+    material: Material,
+    id?: number
   );
   constructor(...args: any[]) {
     if (args.length == 0) {
@@ -23,7 +25,7 @@ export class EstoqueMaterial {
       this.data = toDateApi(new Date());
       this.quantidade = 0;
       this.entrada = 0;
-      this.tipo = '';
+      this.tipo = TIPO_ENTRADA[0];
       this.material = new Material();
     } else {
       this.data = args[0];

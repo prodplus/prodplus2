@@ -8,7 +8,6 @@ import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 /**
@@ -16,8 +15,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
  * @author Marlon Fernando Garcia
  *
  */
-@JsonFormat(shape = Shape.OBJECT)
-@JsonDeserialize(using = TipoMetrico.TipoMetricoDeserializer.class)
+@JsonFormat(shape = Shape.STRING)
 public enum TipoMetrico {
 
 	UN(1.0, "un"), DE(10.0, "dezena"), CE(100.0, "centena"), MI(1000.0, "milhar"), CM(0.01, "cm"),

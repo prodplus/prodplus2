@@ -1,6 +1,6 @@
 export class Produto {
   id: number | null;
-  descricao: string;
+  descricao: '';
   tipoMetrico: string;
   validade: number;
   ativo: boolean;
@@ -17,8 +17,8 @@ export class Produto {
     if (args.length == 0) {
       this.id = null;
       this.descricao = '';
-      this.tipoMetrico = '';
-      this.validade = 0;
+      this.tipoMetrico = 'UN';
+      this.validade = 1;
       this.ativo = true;
     } else {
       this.descricao = args[0];
@@ -26,7 +26,7 @@ export class Produto {
       this.validade = args[2];
       this.ativo = args[3];
       if (typeof args[4] === 'undefined') this.id = null;
-      else this.id = args[4];
+      else this.id = args[5];
     }
   }
 }

@@ -27,14 +27,14 @@ export class Material {
     if (args.length == 0) {
       this.id = null;
       this.descricao = '';
-      this.tipoCompra = '';
-      this.tipoProducao = '';
+      this.tipoCompra = 'UN';
+      this.tipoProducao = 'UN';
       this.fator = 1;
       this.custoCompra = 0;
       this.custoPedido = 0;
       this.custoEstoque = 0;
-      this.leadTime = 0;
-      this.validade = 0;
+      this.leadTime = 1;
+      this.validade = 1;
     } else {
       this.descricao = args[0];
       this.tipoCompra = args[1];
