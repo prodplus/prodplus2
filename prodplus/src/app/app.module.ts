@@ -9,9 +9,11 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { NgxMaskModule } from 'ngx-mask';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ComponentsModule } from './components/components.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,6 +24,7 @@ import { AppComponent } from './app.component';
     NgbModule,
     CurrencyMaskModule,
     NgxMaskModule,
+    ComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

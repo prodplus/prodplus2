@@ -2,3 +2,16 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn-table {
+  width: 45px;
+}
+
+.btn-menu {
+  width: 60px;
+}
+
+.btn-inside {
+  margin-top: 29px;
+  height: 35px;
+}

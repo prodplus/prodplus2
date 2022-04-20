@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+  <div class="mb-4">
+    <label for="inputC" class="form-label">
+      {{ label }}
+    </label>
+    <div class="input-group">
+      <div class="input-group-text">
+        <fa-icon [icon]="icon"></fa-icon>
+      </div>
+      <select id="inputC" class="form-select" formControlName="input">
+        <option *ngFor="let item of options" [value]="item.value">
+          {{ item.l }}
+        </option>
+      </select>
+    </div>
+  </div>
+</form>
