@@ -1,3 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
+
+.table-norm {
+  width: 100%;
+}
+
+.th-table {
+  width: 35px;
+}
+
+.btn-table {
+  height: 28px;
+  width: 28px;
+}

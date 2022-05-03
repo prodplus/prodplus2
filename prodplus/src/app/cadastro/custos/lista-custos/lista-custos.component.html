@@ -1,0 +1,67 @@
+<h2>Custos</h2>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Custos Cadastrados</div>
+    <div class="card-subtitle">
+      <mat-slide-toggle [checked]="ativos" color="primary"
+          (toggleChange)="alteraAtivos()" title="exibir ativos/inativos">
+        {{ ativos ? 'ativos': 'inativos' }}
+      </mat-slide-toggle>
+      <button class="ms-2 btn btn-primary" type="button" title="novo custo"
+          [routerLink]="['novo']">
+        novo
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <pagination [totalItems]="custos.totalElements" [boundaryLinks]="true"
+        previousText="&lsaquo;" firstText="&laquo;" nextText="&rsaquo;"
+        lastText="&raquo;" [maxSize]="6" [ngModel]="pagina"
+        (pageChanged)="mudaPagina($event)" [itemsPerPage]="20">
+    </pagination>
+    <table class="table table-sm table-striped table-hover table-bordered">
+      <caption class="text-primary">
+        Total mensal: {{ totalMensal | currency: 'BRL':'symbol':'0.2-2':'pt' }}
+      </caption>
+      <thead class="bg-dark text-white border-1 border-dark">
+        <th class="text-center">Descrição</th>
+        <th class="text-center">Período</th>
+        <th class="text-center">Valor</th>
+        <th class="text-center th-table">a/d</th>
+        <th class="text-center th-table">edt</th>
+        <th class="text-center th-table">exc</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let custo of custos.content">
+          <td class="align-middle">{{ custo.descricao }}</td>
+          <td class="text-center align-middle">
+            {{ custo.periodo }}
+          </td>
+          <td class="text-end align-middle">
+            {{ custo.valor | currency: 'BRL':'symbol':'0.2-2':'pt' }}
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-secondary btn-table" title="ativar/desativar"
+                type="button" (click)="openDialogAtivar(custo)">
+              <!-- <mat-icon style="font-size: 14px;">no_sim</mat-icon> -->
+              &squf;
+            </button>
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-primary btn-table" title="editar custo"
+                type="button" [routerLink]="['novo', custo.id]">
+              &squf;
+            </button>
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-danger btn-table" title="excluir custo"
+                type="button" (click)="openDialogExcluir(custo)">
+              &squf;
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

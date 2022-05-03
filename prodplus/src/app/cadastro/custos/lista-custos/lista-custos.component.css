@@ -1,0 +1,17 @@
+.mat-column-valor {
+  text-align: right;
+}
+
+.mat-column-periodo {
+  text-align: center;
+}
+
+.mat-column-ativar, .mat-column-editar, .mat-column-excluir {
+  text-align: center;
+  width: 60px;
+  padding: 0px;
+}
+
+.mat-icon {
+  height: 28px;
+}
