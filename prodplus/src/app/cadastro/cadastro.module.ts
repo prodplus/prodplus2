@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -30,6 +31,7 @@ import { ListaCustosComponent } from './custos/lista-custos/lista-custos.compone
     CurrencyMaskModule,
     NgxMaskModule,
     PaginationModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class CadastroModule {}

@@ -16,3 +16,15 @@ html, body {
   height: 28px;
   width: 28px;
 }
+
+.spinner-geral {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5em;
+}
+
+.titulo {
+  text-align: center;
+  color: green;
+}

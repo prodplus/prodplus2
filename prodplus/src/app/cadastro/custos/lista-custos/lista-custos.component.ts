@@ -12,6 +12,7 @@ import { CustoService } from 'src/app/services/custo.service';
   styleUrls: ['./lista-custos.component.css'],
 })
 export class ListaCustosComponent implements OnInit {
+  isLoading = false;
   custos: Page<Custo> = new Page();
   pagina: number = 1;
   ativos: boolean = true;
@@ -20,6 +21,7 @@ export class ListaCustosComponent implements OnInit {
   constructor(private custoService: CustoService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.recarregar(this.pagina);
   }
 
@@ -31,9 +33,10 @@ export class ListaCustosComponent implements OnInit {
     this.custoService.listarP(this.ativos, pagina - 1, 20).subscribe({
       next: (c) => (this.custos = c),
       complete: () => {
-        this.custoService
-          .getTotalMes()
-          .subscribe((t) => (this.totalMensal = t));
+        this.custoService.getTotalMes().subscribe({
+          next: (t) => (this.totalMensal = t),
+          complete: () => (this.isLoading = false),
+        });
       },
     });
   }

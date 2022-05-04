@@ -17,6 +17,7 @@ import { CustoService } from 'src/app/services/custo.service';
   styleUrls: ['./cad-custos.component.css'],
 })
 export class CadCustosComponent implements OnInit, AfterViewInit {
+  isLoading = false;
   custo: Custo = new Custo();
   form!: FormGroup;
   periodos: string[] = Periodos;
@@ -45,12 +46,16 @@ export class CadCustosComponent implements OnInit, AfterViewInit {
 
     this.route.paramMap.subscribe((values) => {
       if (values.get('id')) {
+        this.isLoading = true;
         const id: number | null = Number(values.get('id'));
         if (id != null) {
           this.custoService.buscar(id).subscribe({
             next: (c) => (this.custo = c),
             error: (err) => console.log(err),
-            complete: () => this.carregaForm(this.custo),
+            complete: () => {
+              this.carregaForm(this.custo);
+              this.isLoading = false;
+            },
           });
         }
       }
@@ -85,19 +90,26 @@ export class CadCustosComponent implements OnInit, AfterViewInit {
   }
 
   salvar() {
+    this.isLoading = true;
     if (this.custo.id != null) {
       this.custoService
         .atualizar(this.custo.id, this.carregaCusto())
         .subscribe({
           next: (c) => (this.custo = c),
           error: (err) => console.log(err),
-          complete: () => this.router.navigate(['/cadastro/custos']),
+          complete: () => {
+            this.isLoading = false;
+            this.router.navigate(['/cadastro/custos']);
+          },
         });
     } else {
       this.custoService.salvar(this.carregaCusto()).subscribe({
         next: (c) => (this.custo = c),
         error: (err) => console.log(err),
-        complete: () => this.router.navigate(['/cadastro/custos']),
+        complete: () => {
+          this.isLoading = false;
+          this.router.navigate(['/cadastro/custos']);
+        },
       });
     }
   }
