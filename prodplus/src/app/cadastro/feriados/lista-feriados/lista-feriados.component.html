@@ -1,0 +1,41 @@
+<h2 class="titulo">Feriados</h2>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="card" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Feriados Cadastrados</div>
+    <div class="card-subtitle">
+      <button class="btn btn-primary" type="button" title="novo feriado"
+          [routerLink]="['novo']">
+        novo
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <pagination [totalItems]="feriados.totalElements" [boundaryLinks]="true"
+        previousText="&lsaquo;" firstText="&laquo;" nextText="&rsaquo;"
+        lastText="&raquo;" [maxSize]="6" [ngModel]="pagina" [itemsPerPage]="20"
+        (pageChanged)="mudaPagina($event)">
+    </pagination>
+    <app-tabela>
+      <thead class="bg-dark text-white border-1 border-dark">
+        <th class="text-center">Feriado</th>
+        <th class="text-center">Data</th>
+        <th class="text-center th-table">exc</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feriado of feriados.content">
+          <td class="align-middle">{{ feriado.descricao }}</td>
+          <td class="text-center align-middle">
+            {{ feriado.data | date: 'dd/MM/yyyy' }}
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-danger btn-table" title="excluir feriado"
+                type="button" (click)="openDialogExcluir(feriado)">
+              &squf;
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </app-tabela>
+  </div>
+</div>

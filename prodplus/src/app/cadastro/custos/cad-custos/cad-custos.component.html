@@ -12,32 +12,34 @@
         </button>
       </div>
     </div>
-    <form [formGroup]="form" (ngSubmit)="salvar()" style="padding: 15px;">
-      <div class="mb-3">
-        <label for="inputDescricao" class="form-label">Descrição:</label>
-        <input type="text" [ngClass]="onBlurInput('descricao')" id="inputDescricao" formControlName="descricao"
-          style="text-transform: uppercase;" #input placeholder="obrigatório">
-      </div>
-      <div class="mb-3 col-3">
-        <label for="inputPeriodo" class="form-label">Período:</label>
-        <select id="inputPeriodo" [ngClass]="onBlurSelect('periodo')" formControlName="periodo">
-          <option [ngValue]="null" disabled>obrigatório</option>
-          <option *ngFor="let item of periodos" [value]="item">{{ item }}</option>
-        </select>
-      </div>
-      <div class="mb-3 col-3">
-        <label for="inputValor" class="form-label">Valor:</label>
-        <input currencyMask id="inputValor" [ngClass]="onBlurInput('valor')" formControlName="valor"
-          placeholder="obrigatório">
-        <small class="text-danger" *ngIf="form.get('valor')?.hasError('min')">
-          inválido!!
-        </small>
-      </div>
-      <div class="d-grid gap-1">
-        <button class="btn btn-lg btn-success" [disabled]="form.invalid" type="submit">
-          salvar
-        </button>
-      </div>
-    </form>
-      </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="salvar()" style="padding: 15px;">
+        <div class="mb-3">
+          <label for="inputDescricao" class="form-label">Descrição:</label>
+          <input type="text" [ngClass]="onBlurInput('descricao')" id="inputDescricao" formControlName="descricao"
+            style="text-transform: uppercase;" #input placeholder="obrigatório">
+        </div>
+        <div class="mb-3 col-3">
+          <label for="inputPeriodo" class="form-label">Período:</label>
+          <select id="inputPeriodo" [ngClass]="onBlurSelect('periodo')" formControlName="periodo">
+            <option [ngValue]="null" disabled>obrigatório</option>
+            <option *ngFor="let item of periodos" [value]="item">{{ item }}</option>
+          </select>
+        </div>
+        <div class="mb-3 col-3">
+          <label for="inputValor" class="form-label">Valor:</label>
+          <input currencyMask id="inputValor" [ngClass]="onBlurInput('valor')" formControlName="valor"
+            placeholder="obrigatório">
+          <small class="text-danger" *ngIf="form.get('valor')?.hasError('min')">
+            inválido!!
+          </small>
+        </div>
+        <div class="d-grid gap-1">
+          <button class="btn btn-lg btn-success" [disabled]="form.invalid" type="submit">
+            salvar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

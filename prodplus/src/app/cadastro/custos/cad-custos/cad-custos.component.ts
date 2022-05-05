@@ -6,10 +6,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Custo } from 'src/app/models/custo';
 import { Periodos } from 'src/app/models/enums';
 import { CustoService } from 'src/app/services/custo.service';
+import { openErrorDialog } from 'src/app/shared/mensagem-utils';
 
 @Component({
   selector: 'app-cad-custos',
@@ -28,7 +30,8 @@ export class CadCustosComponent implements OnInit, AfterViewInit {
     private builder: FormBuilder,
     private custoService: CustoService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +54,10 @@ export class CadCustosComponent implements OnInit, AfterViewInit {
         if (id != null) {
           this.custoService.buscar(id).subscribe({
             next: (c) => (this.custo = c),
-            error: (err) => console.log(err),
+            error: (err) => {
+              this.isLoading = false;
+              openErrorDialog(this.dialog, err);
+            },
             complete: () => {
               this.carregaForm(this.custo);
               this.isLoading = false;
@@ -96,7 +102,10 @@ export class CadCustosComponent implements OnInit, AfterViewInit {
         .atualizar(this.custo.id, this.carregaCusto())
         .subscribe({
           next: (c) => (this.custo = c),
-          error: (err) => console.log(err),
+          error: (err) => {
+            this.isLoading = false;
+            openErrorDialog(this.dialog, err);
+          },
           complete: () => {
             this.isLoading = false;
             this.router.navigate(['/cadastro/custos']);
@@ -105,7 +114,10 @@ export class CadCustosComponent implements OnInit, AfterViewInit {
     } else {
       this.custoService.salvar(this.carregaCusto()).subscribe({
         next: (c) => (this.custo = c),
-        error: (err) => console.log(err),
+        error: (err) => {
+          this.isLoading = false;
+          openErrorDialog(this.dialog, err);
+        },
         complete: () => {
           this.isLoading = false;
           this.router.navigate(['/cadastro/custos']);

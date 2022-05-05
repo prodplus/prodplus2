@@ -14,9 +14,16 @@ import { ComponentsModule } from '../components/components.module';
 import { CadastroRoutingModule } from './cadastro-routing.module';
 import { CadCustosComponent } from './custos/cad-custos/cad-custos.component';
 import { ListaCustosComponent } from './custos/lista-custos/lista-custos.component';
+import { CadFeriadosComponent } from './feriados/cad-feriados/cad-feriados.component';
+import { ListaFeriadosComponent } from './feriados/lista-feriados/lista-feriados.component';
 
 @NgModule({
-  declarations: [CadCustosComponent, ListaCustosComponent],
+  declarations: [
+    CadCustosComponent,
+    ListaCustosComponent,
+    ListaFeriadosComponent,
+    CadFeriadosComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,

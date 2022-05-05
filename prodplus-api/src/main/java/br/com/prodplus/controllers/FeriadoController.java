@@ -4,7 +4,10 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +26,7 @@ import br.com.prodplus.services.FeriadoService;
  */
 @RestController
 @RequestMapping("/feriados")
+@CrossOrigin("http://localhost:4200")
 public class FeriadoController {
 
 	@Autowired
@@ -39,13 +43,15 @@ public class FeriadoController {
 	}
 
 	@GetMapping("/data/{data}")
-	public ResponseEntity<Feriado> buscar(@PathVariable LocalDate data) {
+	public ResponseEntity<Feriado> buscar(
+			@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate data) {
 		return ResponseEntity.ok(this.feriadoService.buscar(data));
 	}
 
 	@GetMapping("/listar/{pagina}/{quant}/{de}")
-	public ResponseEntity<Page<Feriado>> listar(@PathVariable LocalDate de,
-			@PathVariable int pagina, @PathVariable int quant) {
+	public ResponseEntity<Page<Feriado>> listar(
+			@PathVariable @DateTimeFormat(iso = ISO.DATE) LocalDate de, @PathVariable int pagina,
+			@PathVariable int quant) {
 		return ResponseEntity.ok(this.feriadoService.listar(de, pagina, quant));
 	}
 

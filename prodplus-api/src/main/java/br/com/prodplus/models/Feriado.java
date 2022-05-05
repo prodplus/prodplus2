@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +39,7 @@ public class Feriado implements Serializable, Comparable<Feriado> {
 	private String descricao;
 	@Column(nullable = false, unique = true)
 	@NotNull(message = "a data é obrigatória!")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate data;
 	@Column(nullable = false)
 	@NotNull(message = "campo obrigatório!")

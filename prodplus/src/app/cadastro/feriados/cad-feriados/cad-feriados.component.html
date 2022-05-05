@@ -1,0 +1,36 @@
+<h2 class="titulo">Feriados</h2>
+<mat-spinner *ngIf="isLoading" class="spinner-geral"></mat-spinner>
+<div class="mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        Cadastrar feriado
+      </div>
+      <div class="card-subtitle">
+        <button class="btn btn-danger" type="button" [routerLink]="['/cadastro/feriados']">
+          cancelar
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="salvar()" style="padding: 15px">
+        <div class="mb-3">
+          <label for="inputDescricao" class="form-label">Descrição:</label>
+          <input type="text" [ngClass]="onBlurInput('descricao')" id="inputDescricao"
+              formControlName="descricao" #input style="text-transform: uppercase;"
+              placeholder="obrigatório">
+        </div>
+        <div class="col-3 mb-3">
+          <label for="inputData" class="form-label">Data:</label>
+          <input type="date" [ngClass]="onBlurInput('data')" id="inputData"
+              formControlName="data" placeholder="obrigatório">
+        </div>
+        <div class="d-grid gap-1">
+          <button class="btn btn-lg btn-success" [disabled]="form.invalid" type="submit">
+            salvar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

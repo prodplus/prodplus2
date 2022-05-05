@@ -1,11 +1,11 @@
 <h4 mat-dialog-title>{{ data.desc }}</h4>
 <div mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button color="disabled" (click)="onNoClick()"
-        cdkFocus>
+    <button class="btn btn-secondary me-2" (click)="onNoClick()"
+        cdkFocusInitial>
       cancelar
     </button>
-    <button mat-flat-button [mat-dialog-close]="data" color="warn">
+    <button [mat-dialog-close]="data" class="btn btn-danger ms-2">
       confirmar
     </button>
   </mat-dialog-actions>

@@ -5,6 +5,7 @@ import { DialogComponent } from 'src/app/components/dialog/dialog.component';
 import { Page } from 'src/app/models/auxiliares/page';
 import { Custo } from 'src/app/models/custo';
 import { CustoService } from 'src/app/services/custo.service';
+import { openErrorDialog } from 'src/app/shared/mensagem-utils';
 
 @Component({
   selector: 'app-lista-custos',
@@ -32,9 +33,17 @@ export class ListaCustosComponent implements OnInit {
   private recarregar(pagina: number) {
     this.custoService.listarP(this.ativos, pagina - 1, 20).subscribe({
       next: (c) => (this.custos = c),
+      error: (err) => {
+        this.isLoading = false;
+        openErrorDialog(this.dialog, err);
+      },
       complete: () => {
         this.custoService.getTotalMes().subscribe({
           next: (t) => (this.totalMensal = t),
+          error: (err) => {
+            this.isLoading = false;
+            openErrorDialog(this.dialog, err);
+          },
           complete: () => (this.isLoading = false),
         });
       },
@@ -72,14 +81,14 @@ export class ListaCustosComponent implements OnInit {
 
   private ativar(id: number) {
     this.custoService.ativar(id).subscribe({
-      error: (err) => console.log(err),
+      error: (err) => openErrorDialog(this.dialog, err),
       complete: () => this.recarregar(this.pagina),
     });
   }
 
   private excluir(id: number) {
     this.custoService.excluir(id).subscribe({
-      error: (err) => console.log(err),
+      error: (err) => openErrorDialog(this.dialog, err),
       complete: () => this.recarregar(this.pagina),
     });
   }

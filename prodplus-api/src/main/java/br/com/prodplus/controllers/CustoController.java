@@ -69,7 +69,7 @@ public class CustoController {
 		this.custoService.excluir(id);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@GetMapping("/total")
 	public ResponseEntity<BigDecimal> getTotalMes() {
 		return ResponseEntity.ok(this.custoService.getTotalMes());

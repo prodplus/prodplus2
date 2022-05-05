@@ -19,6 +19,7 @@ import br.com.prodplus.models.Amostra;
 import br.com.prodplus.models.Configuracao;
 import br.com.prodplus.models.Custo;
 import br.com.prodplus.models.DemandaExec;
+import br.com.prodplus.models.Feriado;
 import br.com.prodplus.models.Material;
 import br.com.prodplus.models.Processo;
 import br.com.prodplus.models.Produto;
@@ -62,6 +63,8 @@ public class DBService {
 	private LoteMaterialService loteMaterialService;
 	@Autowired
 	private LoteProdutoService loteProdutoService;
+	@Autowired
+	private FeriadoService feriadoService;
 	private Random random = new Random();
 
 	public void initDatabase() {
@@ -70,6 +73,17 @@ public class DBService {
 		Turno turno2 = new Turno(LocalTime.of(13, 30), LocalTime.of(18, 0));
 		this.configService.salvar(new Configuracao(1, new HashSet<>(Arrays.asList(turno1, turno2)),
 				new HashSet<>(Arrays.asList(turno1)), new HashSet<>(), true, 0.0));
+
+		// Feriados
+		this.feriadoService
+				.salvar(new Feriado(null, "CORPUS CHRISTI", LocalDate.of(2022, 6, 7), false));
+		this.feriadoService.salvar(
+				new Feriado(null, "INDEPENDÊNCIA DO BRASIL", LocalDate.of(2022, 9, 7), true));
+		this.feriadoService.salvar(
+				new Feriado(null, "NOSSA SENHORA APARECIDA", LocalDate.of(2022, 10, 12), true));
+		this.feriadoService.salvar(new Feriado(null, "FINADOS", LocalDate.of(2022, 11, 2), true));
+		this.feriadoService.salvar(
+				new Feriado(null, "PROCLAMAÇÃO DA REPÚBLICA", LocalDate.of(2022, 11, 15), true));
 
 		// Custos fixos
 		this.custoService
