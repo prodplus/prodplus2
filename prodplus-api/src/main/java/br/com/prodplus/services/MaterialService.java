@@ -126,6 +126,9 @@ public class MaterialService {
 	public void excluir(Integer id) {
 		try {
 			this.materialRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT,
+					"não é possível excluir o material!", e.getCause());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,

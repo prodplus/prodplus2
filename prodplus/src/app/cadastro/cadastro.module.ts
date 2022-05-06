@@ -16,6 +16,8 @@ import { CadCustosComponent } from './custos/cad-custos/cad-custos.component';
 import { ListaCustosComponent } from './custos/lista-custos/lista-custos.component';
 import { CadFeriadosComponent } from './feriados/cad-feriados/cad-feriados.component';
 import { ListaFeriadosComponent } from './feriados/lista-feriados/lista-feriados.component';
+import { CadMateriaisComponent } from './materiais/cad-materiais/cad-materiais.component';
+import { ListaMateriaisComponent } from './materiais/lista-materiais/lista-materiais.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { ListaFeriadosComponent } from './feriados/lista-feriados/lista-feriados
     ListaCustosComponent,
     ListaFeriadosComponent,
     CadFeriadosComponent,
+    ListaMateriaisComponent,
+    CadMateriaisComponent,
   ],
   imports: [
     CommonModule,

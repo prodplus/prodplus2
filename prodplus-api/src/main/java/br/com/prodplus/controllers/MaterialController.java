@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.prodplus.models.Material;
+import br.com.prodplus.models.enums.TipoMetrico;
 import br.com.prodplus.services.MaterialService;
+import br.com.prodplus.utils.TipoMetricoUtils;
 
 /**
  * 
@@ -68,6 +70,11 @@ public class MaterialController {
 	public ResponseEntity<?> excluir(@PathVariable Integer id) {
 		this.materialService.excluir(id);
 		return ResponseEntity.ok().build();
+	}
+
+	@GetMapping("/correspondentes/{tipo}")
+	public ResponseEntity<List<TipoMetrico>> getCorrespondentes(@PathVariable TipoMetrico tipo) {
+		return ResponseEntity.ok(TipoMetricoUtils.correspondentes(tipo));
 	}
 
 }

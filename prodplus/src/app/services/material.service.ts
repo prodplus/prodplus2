@@ -44,4 +44,8 @@ export class MaterialService {
   excluir(id: number): Observable<any> {
     return this.http.delete(`${URL}/${id}`);
   }
+
+  getCorrespondentes(tipo: string): Observable<string[]> {
+    return this.http.get<string[]>(`${URL}/correspondentes/${tipo}`);
+  }
 }

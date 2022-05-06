@@ -1,0 +1,57 @@
+<h2 class="titulo">Materiais</h2>
+<mat-spinner *ngIf="isLoading" class="spinner-geral"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Materiais cadastrados</div>
+    <div class="card-subtitle">
+      <button class="btn btn-primary" type="button" title="novo custo"
+          [routerLink]="['novo']">
+        novo
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <pagination [totalItems]="materiais.totalElements" [boundaryLinks]="true"
+        previousText="&lsaquo;" firstText="&laquo;" nextText="&rsaquo;"
+        lastText="&raquo;" [maxSize]="6" [ngModel]="pagina" [itemsPerPage]="20"
+        (pageChanged)="mudaPagina($event)">
+    </pagination>
+    <app-tabela>
+      <thead class="bg-dark border-1 border-dark text-white">
+        <th class="text-center">Descrição</th>
+        <th class="text-center" title="tipo métrico compra">T.M.C.</th>
+        <th class="text-center" title="tipo métrico produção">T.M.P.</th>
+        <th class="text-center">Compra</th>
+        <th class="text-center th-table">edt</th>
+        <th class="text-center th-table">exc</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let material of materiais.content">
+          <td class="align-middle">{{ material.descricao }}</td>
+          <td class="text-center align-middle">
+            {{ getDescricaoTipo(material.tipoCompra) }}
+          </td>
+          <td class="text-center align-middle">
+            {{ getDescricaoTipo(material.tipoProducao) }}
+          </td>
+          <td class="text-end align-middle">
+            {{ material.custoCompra | currency: 'BRL':'symbol':'0.2-2':'pt' }} /
+            {{ getDescricaoTipo(material.tipoCompra) }}
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-primary btn-table" title="editar material"
+                type="button" [routerLink]="['novo', material.id]">
+              &squf;
+            </button>
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-danger btn-table" title="excluir material"
+                type="button" (click)="openDialogExcluir(material)">
+              &squf;
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </app-tabela>
+  </div>
+</div>

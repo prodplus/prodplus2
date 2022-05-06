@@ -1,9 +1,9 @@
 <h4 mat-dialog-title>
-  Ocorreu um erro no servidor! Contate o administrador do sistema!
+  {{ data.desc }}
 </h4>
 <div mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button color="descricao" (click)="onNoClick()">
+    <button mat-button color="disable" (click)="onNoClick()" cdkFocusInitial>
       ok
     </button>
   </mat-dialog-actions>

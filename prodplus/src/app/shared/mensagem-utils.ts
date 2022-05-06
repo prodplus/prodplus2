@@ -1,5 +1,6 @@
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../components/dialog/dialog.component';
+import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
 
 export function openDialog(
   matDialog: MatDialog,
@@ -15,9 +16,9 @@ export function openDialog(
 export function openErrorDialog(
   matDialog: MatDialog,
   err: any
-): MatDialogRef<DialogComponent, string> {
+): MatDialogRef<ErrorDialogComponent, string> {
   console.log(err);
-  return matDialog.open(DialogComponent, {
+  return matDialog.open(ErrorDialogComponent, {
     width: '350px',
     data: { desc: err.error.message, value: 0 },
   });
