@@ -1,0 +1,45 @@
+<h2 class="titulo">Produtos</h2>
+<mat-spinner class="spinner-geral" *ngIf="isLoading"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Cadastrar produto</div>
+    <div class="card-subtitle">
+      <button class="btn btn-danger" type="button"
+          [routerLink]="['/cadastro/produtos']">
+        cancelar
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="salvar()" style="padding: 15px;">
+      <div class="mb-3">
+        <label for="inputDescricao" class="form-label">Descrição:</label>
+        <input type="text" id="inputDescricao" [ngClass]="onBlurInput('descricao')"
+            formControlName="descricao" #input autofocus
+            style="text-transform: uppercase;">
+      </div>
+      <div class="row col-12 mb-3">
+        <div class="col-3">
+          <label for="inputTipo" class="form-label">Tipo métrico:</label>
+          <select id="inputTipo" class="form-select" formControlName="tipoMetrico"
+              [ngClass]="onBlurSelect('tipoMetrico')">
+            <option [ngValue]="null" disabled>...</option>
+            <option *ngFor="let item of tiposMetricos" [value]="item.value">
+              {{ item.desc }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label for="inputValidade" class="form-label">Validade:</label>
+          <input type="text" id="inputValidade" [ngClass]="onBlurInput('validade')"
+              formControlName="validade" mask="0*" suffix=" dias">
+        </div>
+      </div>
+      <div class="d-grid gap-1">
+        <button class="btn btn-lg btn-success" type="submit" [disabled]="form.invalid">
+          salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

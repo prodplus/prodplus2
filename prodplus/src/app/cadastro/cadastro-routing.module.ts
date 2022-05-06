@@ -6,6 +6,8 @@ import { CadFeriadosComponent } from './feriados/cad-feriados/cad-feriados.compo
 import { ListaFeriadosComponent } from './feriados/lista-feriados/lista-feriados.component';
 import { CadMateriaisComponent } from './materiais/cad-materiais/cad-materiais.component';
 import { ListaMateriaisComponent } from './materiais/lista-materiais/lista-materiais.component';
+import { CadProdutosComponent } from './produtos/cad-produtos/cad-produtos.component';
+import { ListaProdutosComponent } from './produtos/lista-produtos/lista-produtos.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,19 @@ const routes: Routes = [
         children: [
           { path: '', component: CadMateriaisComponent },
           { path: ':id', component: CadMateriaisComponent },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'produtos',
+    children: [
+      { path: '', component: ListaProdutosComponent },
+      {
+        path: 'novo',
+        children: [
+          { path: '', component: CadProdutosComponent },
+          { path: ':id', component: CadProdutosComponent },
         ],
       },
     ],
