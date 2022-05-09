@@ -1,0 +1,59 @@
+<h2 class="titulo">Processos</h2>
+<mat-spinner class="spinner-geral" *ngIf="isLoading"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Processos cadastrados</div>
+    <div class="card-subtitle">
+      <mat-slide-toggle [checked]="ativos" color="primary"
+          (toggleChange)="alteraAtivos()" title="exibir ativos/inativos">
+        {{ ativos ? 'ativos' : 'inativos' }}
+      </mat-slide-toggle>
+      <button class="ms-2 btn btn-primary" type="button" title="novo processo"
+          [routerLink]="['novo']">
+        novo
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <pagination [totalItems]="processos.totalElements" [boundaryLinks]="true"
+        previousText="&lsaquo;" firstText="&laquo;" nextText="&rsaquo;"
+        lastText="&raquo;" [maxSize]="6" [ngModel]="pagina"
+        (pageChanged)="mudaPagina($event)" [itemsPerPage]="20">
+    </pagination>
+    <app-tabela>
+      <thead class="bg-dark text-white border-1 border-dark">
+        <th class="text-center">Descrição</th>
+        <th class="text-center">Tipo</th>
+        <th class="text-center th-table">edt</th>
+        <th class="text-center th-table">a/d</th>
+        <th class="text-center th-table">exc</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let proc of processos.content">
+          <td class="align-middle">{{ proc.descricao }}</td>
+          <td class="text-center align-middle">
+            {{ proc.tipo }}
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-primary btn-table" title="editar processo"
+                type="button" [routerLink]="['novo', proc.id]">
+              &squf;
+            </button>
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-secondary btn-table" title="ativar/desativar"
+                type="button" (click)="openDialogAtivar(proc)">
+              &squf;
+            </button>
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-danger btn-table" title="excluir processo"
+                type="button" (click)="openDialogExcluir(proc)">
+              &squf;
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </app-tabela>
+  </div>
+</div>

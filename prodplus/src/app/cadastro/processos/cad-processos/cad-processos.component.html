@@ -1,0 +1,41 @@
+<h2 class="titulo">Processos</h2>
+<mat-spinner class="spinner-geral" *ngIf="isLoading"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Cadastrar processo</div>
+    <div class="card-subtitle">
+      <button class="btn btn-danger" type="button" [routerLink]="['/cadastro/processos']">
+        cancelar
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="salvar()" style="padding: 15px;">
+      <div class="mb-3 col-3">
+        <label for="inputTipo" class="form-label">Tipo:</label>
+        <select id="inputTipo" class="form-select" formControlName="tipo"
+            [ngClass]="onBlurSelect('tipo')" #input>
+          <option [ngValue]="null" disabled>selecione</option>
+          <option *ngFor="let item of tipos" [value]="item">{{ item }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="inputDescricao" class="form-label">Descrição:</label>
+        <input type="text" id="inputDescricao" class="form-control"
+            formControlName="descricao" style="text-transform: uppercase;"
+            [ngClass]="onBlurInput('descricao')">
+      </div>
+      <div class="mb-3 col-3">
+        <label for="inputCusto" class="form-label">Custo adicional:</label>
+        <input currencyMask id="inputCusto" class="form-control"
+            [ngClass]="onBlurInput('custoAdicional')"
+            formControlName="custoAdicional">
+      </div>
+      <div class="d-grid gap-1">
+        <button class="btn btn-lg btn-success" type="submit" [disabled]="form.invalid">
+          salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
