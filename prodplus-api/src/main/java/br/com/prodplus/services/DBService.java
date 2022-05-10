@@ -36,6 +36,7 @@ import br.com.prodplus.models.enums.TipoMetrico;
 import br.com.prodplus.models.enums.TipoProcesso;
 import br.com.prodplus.models.forms.LoteMaterialForm;
 import br.com.prodplus.models.forms.LoteProdutoForm;
+import br.com.prodplus.models.forms.ProdutoSaidaForm;
 
 /**
  * 
@@ -65,6 +66,8 @@ public class DBService {
 	private LoteProdutoService loteProdutoService;
 	@Autowired
 	private FeriadoService feriadoService;
+	@Autowired
+	private ProdutoSaidaService produtoSaidaService;
 	private Random random = new Random();
 
 	public void initDatabase() {
@@ -181,6 +184,9 @@ public class DBService {
 				"BANCADA DE PINTURA", BigDecimal.valueOf(2.5), true));
 		Processo montagem = this.processoService.salvar(new Processo(null, TipoProcesso.MAQUINA,
 				"BANCADA DE MONTAGEM", BigDecimal.valueOf(2.5), true));
+
+		this.produtoSaidaService
+				.salvar(new ProdutoSaidaForm(cadeira.getId(), BigDecimal.valueOf(52.4), 15, null));
 
 		this.amostraService
 				.salvar(new Amostra(new AmostraId(peCadeiraCortado.getId(), corte.getId()), 900,

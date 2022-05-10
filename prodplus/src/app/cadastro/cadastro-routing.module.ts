@@ -10,6 +10,8 @@ import { CadProcessosComponent } from './processos/cad-processos/cad-processos.c
 import { ListaProcessosComponent } from './processos/lista-processos/lista-processos.component';
 import { CadProdutosComponent } from './produtos/cad-produtos/cad-produtos.component';
 import { ListaProdutosComponent } from './produtos/lista-produtos/lista-produtos.component';
+import { CadSaidasComponent } from './saidas/cad-saidas/cad-saidas.component';
+import { ListaSaidasComponent } from './saidas/lista-saidas/lista-saidas.component';
 
 const routes: Routes = [
   {
@@ -67,6 +69,19 @@ const routes: Routes = [
         children: [
           { path: '', component: CadProcessosComponent },
           { path: ':id', component: CadProcessosComponent },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'produtos-saida',
+    children: [
+      { path: '', component: ListaSaidasComponent },
+      {
+        path: 'novo',
+        children: [
+          { path: '', component: CadSaidasComponent },
+          { path: ':id', component: CadSaidasComponent },
         ],
       },
     ],

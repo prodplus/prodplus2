@@ -22,6 +22,8 @@ import { CadProcessosComponent } from './processos/cad-processos/cad-processos.c
 import { ListaProcessosComponent } from './processos/lista-processos/lista-processos.component';
 import { CadProdutosComponent } from './produtos/cad-produtos/cad-produtos.component';
 import { ListaProdutosComponent } from './produtos/lista-produtos/lista-produtos.component';
+import { CadSaidasComponent } from './saidas/cad-saidas/cad-saidas.component';
+import { ListaSaidasComponent } from './saidas/lista-saidas/lista-saidas.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { ListaProdutosComponent } from './produtos/lista-produtos/lista-produtos
     ListaProdutosComponent,
     ListaProcessosComponent,
     CadProcessosComponent,
+    ListaSaidasComponent,
+    CadSaidasComponent,
   ],
   imports: [
     CommonModule,

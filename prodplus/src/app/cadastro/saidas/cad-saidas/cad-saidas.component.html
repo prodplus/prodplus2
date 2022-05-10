@@ -1,0 +1,60 @@
+<h2 class="titulo">Produtos de Saída</h2>
+<mat-spinner class="spinner-geral" *ngIf="isLoading"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Cadastro de produtos saída</div>
+    <div class="card-subtitle">
+      <button class="btn btn-danger" type="button"
+          [routerLink]="['/cadastro/produtos-saida']">
+        cancelar
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="salvar()" style="padding: 15px;">
+      <div class="mb-4 col-4 position-relative">
+        <label for="inputProduto" class="form-label">Produto:</label>
+        <select id="inputProduto" class="form-select" formControlName="produto"
+            [ngClass]="onBlurSelect('produto')" #input>
+          <option [ngValue]="null" disabled>selecione</option>
+          <option *ngFor="let prod of produtos" [value]="prod.id">
+            {{ prod.descricao }}
+          </option>
+        </select>
+      </div>
+      <div class="row col-12 mb-3">
+        <div class="col-md-3 position-relative">
+          <label for="inputValorVenda" class="form-label">Valor venda:</label>
+          <input currencyMask id="inputValorVenda" class="form-control"
+              formControlName="valorVenda" [ngClass]="onBlurInput('valorVenda')">
+          <div class="invalid-tooltip" *ngIf="form.get('valorVenda')?.hasError('min')">
+            valor inválido!
+          </div>
+        </div>
+        <div class="col-3">
+          <label for="inputPrazo" class="form-label">Prazo entrega:</label>
+          <input type="text" id="inputPrazo" class="form-control" mask="0*"
+              suffix=" dias" formControlName="prazoEntrega"
+              [ngClass]="onBlurInput('prazoEntrega')">
+          <div class="invalid-tooltip" *ngIf="form.get('prazoEntrega')?.hasError('min')">
+            valor inválido!
+          </div>
+        </div>
+        <div class="col-3">
+          <label for="inputTempo" class="form-label">Tempo padrão:</label>
+          <input type="text" id="inputTempo" class="form-control" mask="0*"
+              suffix=" s" formControlName="tempoPadrao"
+              [ngClass]="onBlurInput('tempoPadrao')">
+          <div class="invalid-tooltip" *ngIf="form.get('tempoPadrao')?.hasError('min')">
+            valor inválido!
+          </div>
+        </div>
+      </div>
+      <div class="gap-1 d-grid">
+        <button class="btn btn-lg btn-success" type="submit" [disabled]="form.invalid">
+          salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

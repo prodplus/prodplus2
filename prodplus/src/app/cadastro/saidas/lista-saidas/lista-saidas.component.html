@@ -1,0 +1,53 @@
+<h2 class="titulo">Produtos de Saída</h2>
+<mat-spinner class="spinner-geral" *ngIf="isLoading"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Produtos cadastrados</div>
+    <div class="card-subtitle">
+      <button class="btn btn-primary" type="button" title="novo produto"
+          [routerLink]="['novo']">
+        novo
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <pagination [totalItems]="produtosSaida.totalElements" [boundaryLinks]="true"
+        previousText="&lsaquo;" firstText="&laquo;" nextText="&rsaquo;"
+        lastText="&raquo;" [maxSize]="6" [ngModel]="pagina"
+        (pageChanged)="mudaPagina($event)" [itemsPerPage]="20">
+    </pagination>
+    <app-tabela>
+      <thead class="bg-dark text-white border-1 border-dark">
+        <th class="text-center">Descrição</th>
+        <th class="text-center">Valor venda</th>
+        <th class="text-center">Entrega</th>
+        <th class="text-center th-table">edt</th>
+        <th class="text-center th-table">exc</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of produtosSaida.content">
+          <td class="align-middle">{{ prod.produto.descricao }}</td>
+          <td class="text-end align-middle">
+            {{ prod.valorVenda | currency: 'BRL':'symbol':'0.2-2':'pt' }} /
+            {{ getTipoDesc(prod.produto) }}
+          </td>
+          <td class="text-center align-middle">
+            {{ prod.prazoEntrega }} dias
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-primary btn-sm btn-table" title="novo produto"
+                type="button" [routerLink]="['novo', prod.id]">
+              &squf;
+            </button>
+          </td>
+          <td class="text-center align-middle">
+            <button class="btn btn-sm btn-danger btn-table" title="excluir produto"
+                type="button" (click)="openDialogExcluir(prod)">
+              &squf;
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </app-tabela>
+  </div>
+</div>
