@@ -11,6 +11,8 @@ import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxMaskModule } from 'ngx-mask';
 import { ComponentsModule } from '../components/components.module';
+import { CadAmostrasComponent } from './amostras/cad-amostras/cad-amostras.component';
+import { ListaAmostrasComponent } from './amostras/lista-amostras/lista-amostras.component';
 import { CadastroRoutingModule } from './cadastro-routing.module';
 import { CadCustosComponent } from './custos/cad-custos/cad-custos.component';
 import { ListaCustosComponent } from './custos/lista-custos/lista-custos.component';
@@ -39,6 +41,8 @@ import { ListaSaidasComponent } from './saidas/lista-saidas/lista-saidas.compone
     CadProcessosComponent,
     ListaSaidasComponent,
     CadSaidasComponent,
+    ListaAmostrasComponent,
+    CadAmostrasComponent,
   ],
   imports: [
     CommonModule,

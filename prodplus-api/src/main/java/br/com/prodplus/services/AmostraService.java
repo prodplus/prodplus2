@@ -49,7 +49,7 @@ public class AmostraService {
 
 	public Amostra buscar(AmostraId id) {
 		try {
-			return this.amostraRepository.findById(id).orElse(new Amostra());
+			return this.amostraRepository.findById(id).orElse(new Amostra(id));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,

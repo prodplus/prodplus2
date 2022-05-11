@@ -1,0 +1,124 @@
+<h2 class="titulo">Amostras</h2>
+<mat-spinner class="spinner-geral" *ngIf="isLoading"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Cadastro de Amostras</div>
+    <div class="card-subtitle">
+      <button class="btn btn-danger" type="button"
+          [routerLink]="['/cadastro/amostras']">
+        cancelar
+      </button>
+      <h4 class="text-primary">
+        Processo: {{ processo.descricao }}
+      </h4>
+      <h4 class="text-secondary">
+        Produto: {{ produto.descricao }}
+      </h4>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="col-3 mb-3">
+        <label for="inputTolerancia" class="form-label">Tolerância:</label>
+        <input type="text" id="inputTolerancia" mask="0*" suffix=" s" autofocus
+            style="text-align: center;" #input [ngClass]="onBlurInput('tempoTolerancia')"
+            formControlName="tempoTolerancia">
+      </div>
+      <app-cad-tempo [tempos]="amostra.temposMedidos" titulo="Tempos medidos">
+      </app-cad-tempo>
+      <div class="col-4 mb-3">
+        <label for="inputPeriodoSetup" class="form-label">Período setup:</label>
+        <select id="inputPeriodoSetup" class="form-select"
+            [ngClass]="onBlurSelect('periodoSetup')"
+            formControlName="periodoSetup">
+          <option [ngValue]="null" disabled>selecione</option>
+          <option *ngFor="let item of periodosSetup" [value]="item">
+            {{ item }}
+          </option>
+        </select>
+      </div>
+      <div class="row col-12">
+        <div class="col-3 mb-3">
+          <label for="inputPeriodo" class="form-label">Período cíclico:</label>
+          <input type="text" id="inputPeriodo" [ngClass]="onBlurInput('periodo')"
+              formControlName="periodo" style="text-align: center;"
+              mask="0*" suffix=" s">
+        </div>
+        <div class="col-3 mb-3">
+          <label for="inputQuant" class="form-label">Quantidade acíclica:</label>
+          <input type="text" id="inputQuant" [ngClass]="onBlurInput('quantidadeAciclica')"
+              formControlName="quantidadeAciclica" style="text-align: center;"
+              mask="0*" [suffix]="' ' + getTipoDesc(produto)">
+        </div>
+        <div class="col-3 mb-3">
+          <label for="inputQuantFim" class="form-label">Quantidade finalização:</label>
+          <input type="text" id="inputQuantFim"
+              [ngClass]="onBlurInput('quantidadeFinalizacao')"
+              formControlName="quantidadeFinalizacao" style="text-align: center;"
+              mask="0*" [suffix]="' ' + getTipoDesc(produto)">
+        </div>
+      </div>
+      <app-cad-tempo [tempos]="amostra.setups" titulo="Setups medidos"
+          *ngIf="exibirSetups()">
+      </app-cad-tempo>
+      <app-cad-tempo [tempos]="amostra.setupsCiclicos" titulo="Setups cíclicos"
+          *ngIf="exibirCiclicos()">
+      </app-cad-tempo>
+      <app-cad-tempo [tempos]="amostra.setupsAciclicos" titulo="Setups acíclicos"
+          *ngIf="exibirAciclicos()">
+      </app-cad-tempo>
+      <app-cad-tempo [tempos]="amostra.finalizacoesMedidas" titulo="Finalizações medidas"
+          *ngIf="exibirAciclicos()">
+      </app-cad-tempo>
+      <div class="col-3 mb-3">
+        <label for="inputBatelada" class="form-label">Batelada:</label>
+        <input type="text" id="inputBatelada" [ngClass]="onBlurInput('batelada')"
+            formControlName="batelada" mask="0*" [suffix]="' ' + getTipoDesc(produto)"
+            style="text-align: center;">
+      </div>
+      <div class="row col-12 mb-3">
+        <div class="col-3">
+          <label for="inputHabilidade" class="form-label">Habilidade:</label>
+          <select id="inputHabilidade" [ngClass]="onBlurSelect('habilidade')"
+              formControlName="habilidade">
+            <option *ngFor="let item of habilidades" [value]="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label for="inputEsforco" class="form-label">Esforço:</label>
+          <select id="inputEsforco" [ngClass]="onBlurSelect('esforco')"
+              formControlName="esforco">
+            <option *ngFor="let item of esforcos" [value]="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label for="inputCondicao" class="form-label">Condição:</label>
+          <select id="inputCondicao" [ngClass]="onBlurSelect('condicao')"
+              formControlName="condicao">
+            <option *ngFor="let item of condicoes" [value]="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label for="inputConsistencia" class="form-label">Consistência:</label>
+          <select id="inputConsistencia" [ngClass]="onBlurSelect('consistencia')"
+              formControlName="consistencia">
+            <option *ngFor="let item of consistencias" [value]="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="gap-1 d-grid">
+        <button class="btn btn-success btn-lg" type="submit" [disabled]="form.invalid">
+          salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

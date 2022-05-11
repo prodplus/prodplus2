@@ -1,0 +1,44 @@
+<form [formGroup]="form" class="card mat-elevation-z1 mb-3">
+  <div class="card-header">
+    <div class="card-title">
+      {{ titulo }}
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row col-12 mb-3" style="padding: 10px;">
+      <div class="col-3">
+        <label for="inputTempo" class="form-label">Tempo:</label>
+        <input type="text" id="inputTempo" class="form-control" mask="0*" step="1"
+            suffix=" s" min="0" style="text-align: center;"
+            formControlName="tempo">
+      </div>
+      <div class="col-2">
+        <button class="btn btn-sm btn-primary" type="button" (click)="addTempo()"
+            [disabled]="form.invalid" style="margin-top: 35px;">
+          add
+        </button>
+      </div>
+      <div class="col-6">
+        <table class="table table-sm table-striped table-bordered">
+          <thead>
+            <th class="text-center">Tempo</th>
+            <th class="text-center th-table">rem</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tempo of tempos; index as i;">
+              <td class="text-center align-middle">
+                {{ tempo }} s
+              </td>
+              <td class="text-center align-middle">
+                <button class="btn btn-sm btn-table btn-danger" type="button"
+                    (click)="removerTempo(i)" title="remover tempo">
+                  &squf;
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>

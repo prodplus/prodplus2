@@ -98,6 +98,10 @@ public class Amostra implements Serializable, Comparable<Amostra> {
 	@Column(nullable = false, length = 20)
 	@NotNull(message = "a consistência é obrigatória!")
 	private Consistencia consistencia;
+	
+	public Amostra(AmostraId id) {
+		this.setId(id);
+	}
 
 	@Override
 	public int hashCode() {

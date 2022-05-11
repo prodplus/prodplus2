@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CadAmostrasComponent } from './amostras/cad-amostras/cad-amostras.component';
+import { ListaAmostrasComponent } from './amostras/lista-amostras/lista-amostras.component';
 import { CadCustosComponent } from './custos/cad-custos/cad-custos.component';
 import { ListaCustosComponent } from './custos/lista-custos/lista-custos.component';
 import { CadFeriadosComponent } from './feriados/cad-feriados/cad-feriados.component';
@@ -83,6 +85,16 @@ const routes: Routes = [
           { path: '', component: CadSaidasComponent },
           { path: ':id', component: CadSaidasComponent },
         ],
+      },
+    ],
+  },
+  {
+    path: 'amostras',
+    children: [
+      { path: '', component: ListaAmostrasComponent },
+      {
+        path: 'novo/:idProcesso/:idProduto',
+        component: CadAmostrasComponent,
       },
     ],
   },

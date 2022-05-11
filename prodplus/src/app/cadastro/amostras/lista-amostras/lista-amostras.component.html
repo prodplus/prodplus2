@@ -1,0 +1,36 @@
+<h2 class="titulo">Amostras</h2>
+<mat-spinner class="spinner-geral" *ngIf="isLoading"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Selecione o Processo e o Produto</div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="selecionar()">
+      <div class="mb-3 row col-12">
+        <div class="col-5 position-relative">
+          <select for="inputProcesso" [ngClass]="onBlurSelect('processo')"
+              formControlName="processo">
+            <option [ngValue]="null" disabled>selecione</option>
+            <option *ngFor="let proc of processos" [value]="proc.id">
+              {{ proc.descricao }}
+            </option>
+          </select>
+        </div>
+        <div class="col-5 position-relative">
+          <select id="inputProduto" [ngClass]="onBlurSelect('produto')"
+              formControlName="produto">
+            <option [ngValue]="null" disabled>selecione</option>
+            <option *ngFor="let prod of produtos" [value]="prod.id">
+              {{ prod.descricao }}
+            </option>
+          </select>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+            amostrar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
