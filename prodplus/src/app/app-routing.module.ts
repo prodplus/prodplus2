@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./cadastro/cadastro.module').then((m) => m.CadastroModule),
   },
+  {
+    path: 'demanda',
+    loadChildren: () =>
+      import('./demanda/demanda.module').then((m) => m.DemandaModule),
+  },
 ];
 
 @NgModule({

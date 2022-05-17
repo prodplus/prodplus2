@@ -1,6 +1,11 @@
 package br.com.prodplus.models;
 
 import java.io.Serializable;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.WeekFields;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.MappedSuperclass;
@@ -27,6 +32,17 @@ public class Demanda implements Serializable, Comparable<Demanda> {
 	@EmbeddedId
 	private DemandaId id;
 	private Double quantidade;
+
+	public String getDescricao() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate dataDemanda = LocalDate.now().withYear(this.id.getAno())
+				.with(WeekFields.of(DayOfWeek.SUNDAY, 5).weekOfYear(), this.id.getSemana());
+		return String.format("Semana %02d: %s - %s", this.id.getSemana(),
+				dataDemanda.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY))
+						.format(formatter),
+				dataDemanda.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY))
+						.format(formatter));
+	}
 
 	@Override
 	public int hashCode() {

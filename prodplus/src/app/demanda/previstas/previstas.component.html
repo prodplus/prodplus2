@@ -1,0 +1,55 @@
+<h2 class="titulo">Demandas</h2>
+<mat-spinner *ngIf="isLoading" class="spinner-geral"></mat-spinner>
+<div class="card mat-elevation-z10">
+  <div class="card-header">
+    <div class="card-title">
+      Previsões de demandas
+    </div>
+    <div class="card-subtitle">
+      <button class="btn btn-danger" type="button" [routerLink]="['/demanda/executadas']">
+        cancelar
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="prodForm">
+      <div class="row col-12 mb-3">
+        <div class="col-4">
+          <label for="inputProduto" class="form-label">Produto:</label>
+          <select id="inputProduto" class="form-select" formControlName="produto">
+            <option [ngValue]="null">selecione</option>
+            <option *ngFor="let prod of produtos" [value]="prod.id">
+              {{ prod.produto.descricao }}
+            </option>
+          </select>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary" style="margin-top: 32px;"
+              [disabled]="prodForm.invalid" type="button" (click)="previsao()">
+            prever
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="col-6 mb-3">
+      <app-tabela>
+        <thead class="bg-dark text-white border border-1 border-dark">
+          <th class="text-center">Semana</th>
+          <th class="text-center">Última</th>
+          <th class="text-center">Prev</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dem of previstas">
+            <td class="align-middle">{{ dem.descricao }}</td>
+            <td class="text-center align-middle">
+              {{ getExecSemana(dem) }}
+            </td>
+            <td class="text-center align-middle">
+              {{ dem.quantidade }}
+            </td>
+          </tr>
+        </tbody>
+      </app-tabela>
+    </div>
+  </div>
+</div>

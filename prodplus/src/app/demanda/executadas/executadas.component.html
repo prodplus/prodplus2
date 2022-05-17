@@ -1,0 +1,93 @@
+<h2 class="titulo">Demandas</h2>
+<mat-spinner *ngIf="isLoading" class="spinner-geral"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Demandas executadas</div>
+    <div class="card-subtitle">
+      <button class="btn btn-primary" type="button"
+          [routerLink]="['/demanda/previsoes']">
+        previsões
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form">
+      <div class="row mb-3">
+        <div class="col-5">
+          <label for="inputProduto" class="form-label">Produto:</label>
+          <select id="inputProduto" formControlName="produto"
+              [ngClass]="onBlurSelect('produto')">
+            <option [ngValue]="null">selecione</option>
+            <option *ngFor="let prod of produtos" [value]="prod.id">
+              {{ prod.produto.descricao }}
+            </option>
+          </select>
+        </div>
+        <div class="col-3">
+          <label for="inputAno" class="form-label">Ano:</label>
+          <select id="inputAno" formControlName="ano" [ngClass]="onBlurSelect('ano')">
+            <option [ngValue]="null">selecione</option>
+            <option *ngFor="let ano of anos" [value]="ano">
+              {{ ano }}
+            </option>
+          </select>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary" type="button" style="margin-top: 30px;"
+              [disabled]="form.invalid" (click)="onSelect()">
+            buscar
+          </button>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-danger" type="button" style="margin-top: 30px;"
+              (click)="reset()">
+            reset
+          </button>
+        </div>
+      </div>
+    </form>
+    <form [formGroup]="formCad" *ngIf="editando">
+      <div class="row col-12 mb-3">
+        <div class="col-5">
+          <label for="inputDescricao" class="form-label">Demanda:</label>
+          <input type="text" id="inputDescricao" class="form-control"
+              formControlName="descricao" readonly>
+        </div>
+        <div class="col-3">
+          <label for="inputQuantidade" class="form-label">Quantidade:</label>
+          <input type="text" id="inputQuantidade" [ngClass]="onBlurInput('quantidade')"
+              formControlName="quantidade" style="text-align: center;">
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary" type="button" style="margin-top: 30px;"
+              (click)="salvarDemanda()" [disabled]="formCad.invalid">
+            salvar
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="col-6" *ngIf="exibirTabela">
+      <app-tabela>
+        <thead class="bg-dark text-white border border-1 border-dark">
+          <th class="text-center">Semana</th>
+          <th class="text-center">Quant.</th>
+          <th class="text-center th-table">edt</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let demanda of demandas">
+            <td class="text-center align-middle">{{ demanda.descricao }}</td>
+            <td class="text-center align-middle">
+              {{ demanda.quantidade }}
+            </td>
+            <td class="text-center align-middle">
+              <button class="btn btn-sm btn-primary btn-table" type="button"
+                  (click)="onSelectDemanda(demanda)" title="editar demanda">
+                &squf;
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </app-tabela>
+    </div>
+  </div>
+</div>
