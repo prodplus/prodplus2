@@ -6,6 +6,7 @@
     <mat-menu #animals="matMenu">
       <button mat-menu-item [matMenuTriggerFor]="cadastro">Cadastro</button>
       <button mat-menu-item [matMenuTriggerFor]="demandas">Demandas</button>
+      <button mat-menu-item [matMenuTriggerFor]="controle">Controle</button>
     </mat-menu>
     <mat-menu #cadastro="matMenu">
       <button mat-menu-item [routerLink]="['/cadastro/custos']">Custos</button>
@@ -18,6 +19,11 @@
     </mat-menu>
     <mat-menu #demandas="matMenu">
       <button mat-menu-item [routerLink]="['/demanda/executadas']">Executadas</button>
+    </mat-menu>
+    <mat-menu #controle="matMenu">
+      <button mat-menu-item [routerLink]="['/controle/lotes-material']">
+        Lotes Material
+      </button>
     </mat-menu>
   </div>
   <div class="col-10 mt-lg-5">

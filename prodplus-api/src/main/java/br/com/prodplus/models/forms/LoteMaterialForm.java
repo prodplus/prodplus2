@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
 import br.com.prodplus.models.LoteMaterial;
+import br.com.prodplus.models.Material;
 import br.com.prodplus.services.LoteMaterialService;
 import br.com.prodplus.services.MaterialService;
 import lombok.AllArgsConstructor;
@@ -70,15 +71,16 @@ public class LoteMaterialForm implements Serializable {
 			lote.setPedido(this.getPedido());
 			lote.setCustoTotal(this.getCustoTotal());
 			lote.setCustoUnitario(this.getCustoUnitario());
-			lote.setQuantInicial(this.getQuantInicial());
-			lote.setQuantAtual(this.getQuantAtual());
+			lote.setQuantInicial(this.getQuantInicial() * lote.getMaterial().getFator());
+			lote.setQuantAtual(this.getQuantAtual() * lote.getMaterial().getFator());
 			lote.setAtivo(this.isAtivo());
 			return lote;
 		} else {
-			return new LoteMaterial(null, null, materialService.buscar(this.getMaterial()),
-					this.getEntrada(), this.getPedido(), this.getCustoTotal(),
-					this.getCustoUnitario(), this.getQuantInicial(), this.getQuantAtual(),
-					this.isAtivo());
+			Material material = materialService.buscar(this.getMaterial());
+			return new LoteMaterial(null, null, material, this.getEntrada(), this.getPedido(),
+					this.getCustoTotal(), this.getCustoUnitario(),
+					this.getQuantInicial() * material.getFator(),
+					this.getQuantAtual() * material.getFator(), this.isAtivo());
 		}
 	}
 

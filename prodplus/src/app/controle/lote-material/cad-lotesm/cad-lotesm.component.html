@@ -1,0 +1,90 @@
+<h2 class="titulo">Lotes de Material</h2>
+<div class="card mat-elevation-z10">
+  <div class="card-header">
+    <div class="card-title">Cadastro de Lote</div>
+    <div class="card-subtitle">
+      <button class="btn btn-danger" type="button"
+          [routerLink]="['/controle/lotes-material']">
+        cancelar
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="col-2">
+        <label class="form-label">Recebido:</label>
+        <div>
+          <mat-slide-toggle [checked]="recebido" color="primary" title="item recebido?"
+              (toggleChange)="alteraRecebidos()">
+          </mat-slide-toggle>
+        </div>
+      </div>
+      <div class="row col-12 mb-3">
+        <div class="col-5">
+          <label for="inputMaterial" class="form-label">Material:</label>
+          <input type="text" formControlName="material" [matAutocomplete]="auto"
+              class="form-control" required>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let mat of materiais" [value]="mat.descricao"
+              (onSelectionChange)="onSelectMaterial($event.source.value)">
+              {{ mat.descricao }}
+            </mat-option>
+          </mat-autocomplete>
+          <small *ngIf="form.get('material')?.hasError('required')" class="text-danger">
+            obrigatório*
+          </small>
+        </div>
+        <div class="col-2" *ngIf="this.loteForm?.material">
+          <button class="btn btn-warning" style="margin-top: 32px;" type="button"
+              (click)="resetMaterial()">
+            desfazer
+          </button>
+        </div>
+        <div class="col-4">
+          <label for="inputPedido" class="form-label">Data do pedido:</label>
+          <input type="datetime-local" [ngClass]="onBlurInput('pedido')"
+              id="inputPedido" formControlName="pedido" #input>
+        </div>
+      </div>
+      <div class="row col-12 mb-3">
+        <div class="col-3">
+          <label for="inputInicial" class="form-label">Quant. inicial:</label>
+          <input type="text" [ngClass]="onBlurInput('quantInicial')"
+              id="inputInicial" formControlName="quantInicial" mask="0*,00"
+              style="text-align: center;" [suffix]="getTipoMetrico()"
+              (blur)="onBlurQuantInicial()">
+        </div>
+        <div class="col-3">
+          <label for="inputUnitario" class="form-label">
+            Custo unitário / {{ getTipoMetrico() }}:
+          </label>
+          <input currencyMask [ngClass]="onBlurInput('custoUnitario')"
+              formControlName="custoUnitario" (blur)="onBlurCustoUnitario()">
+        </div>
+        <div class="col-3">
+          <label for="inputTotal" class="form-label">Custo total:</label>
+          <input currencyMask id="inputTotal" [ngClass]="onBlurInput('custoTotal')"
+              formControlName="custoTotal">
+        </div>
+      </div>
+      <div class="row col-12 mb-3" *ngIf="recebido">
+        <div class="col-4">
+          <label for="inputEntrada" class="form-label">Data de entrada:</label>
+          <input type="datetime-local" id="inputEntrada" formControlName="entrada"
+              [ngClass]="onBlurInput('entrada')">
+        </div>
+        <div class="col-3">
+          <label for="inputAtual" class="form-label">Quant. atual:</label>
+          <input type="text" id="inputAtual" [ngClass]="onBlurInput('quantAtual')"
+              mask="0*,00" [suffix]="getTipoMetrico()" formControlName="quantAtual"
+              style="text-align: center;">
+        </div>
+      </div>
+      <div class="gap-1 d-grid">
+        <button class="btn btn-success btn-lg" [disabled]="form.invalid" type="submit">
+          salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

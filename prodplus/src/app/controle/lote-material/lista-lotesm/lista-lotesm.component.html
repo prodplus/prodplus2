@@ -1,0 +1,73 @@
+<h2 class="titulo">Lotes de Material</h2>
+<mat-spinner *ngIf="isLoading" class="spinner-geral"></mat-spinner>
+<div class="card mat-elevation-z10" *ngIf="!isLoading">
+  <div class="card-header">
+    <div class="card-title">Lotes em Estoque</div>
+    <div class="card-subtitle">
+      <button class="btn btn-primary" type="button"
+          [routerLink]="['/controle/lotes-material/novo']">
+        novo
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="matForm">
+      <div class="row col-12 mb-3">
+        <div class="col-5">
+          <label for="inputMaterial" class="form-label">Material:</label>
+          <input type="text" class="form-control" formControlName="material"
+              [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let mat of materiais" [value]="mat.descricao"
+                (onSelectionChange)="onSelectMaterial($event.source.value)">
+              {{ mat.descricao }}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+        <div class="col-2" *ngIf="this.materialSelecionado.id != null">
+          <button class="btn btn-warning" style="margin-top: 32px;"
+              type="button" (click)="resetMaterial()">
+            desfazer
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="text-center mt-lg-5 mb-3" *ngIf="loadingTabela">
+      <div class="spinner-border">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    <app-tabela>
+      <caption *ngIf="lotes.length == 0">
+        nenhum lote em estoque...
+      </caption>
+      <caption *ngIf="lotes.length != 0">
+        lotes em estoque:
+      </caption>
+      <thead class="bg-dark text-white border-1 border-dark">
+        <th class="text-center">Rastreio</th>
+        <th class="text-center">Pedido</th>
+        <th class="text-center">Entrada</th>
+        <th class="text-center">Inicial</th>
+        <th class="text-center">Atual</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lote of lotes">
+          <td class="align-middle">{{ lote.rastreio }}</td>
+          <td class="text-center align-middle">
+            {{ lote.pedido | date: 'dd/MM/yyyy' }}
+          </td>
+          <td class="text-center align-middle">
+            {{ lote.entrada| date: 'dd/MM/yyyy' }}
+          </td>
+          <td class="text-end align-middle">
+            {{ lote.quantInicial | number:'0.0-2':'pt' }} {{ getTipoDesc(lote) }}
+          </td>
+          <td class="text-end align-middle">
+            {{ lote.quantAtual | number:'0.0-2':'pt' }} {{ getTipoDesc(lote) }}
+          </td>
+        </tr>
+      </tbody>
+    </app-tabela>
+  </div>
+</div>

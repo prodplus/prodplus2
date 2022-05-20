@@ -106,7 +106,7 @@ public class DBService {
 		this.loteMaterialService.salvar(new LoteMaterialForm(null, pinus.getId(),
 				LocalDateTime.of(LocalDate.of(2022, 1, 15), LocalTime.of(8, 0)),
 				LocalDateTime.of(LocalDate.of(2022, 1, 1), LocalTime.of(8, 0)),
-				BigDecimal.valueOf(1470.0), BigDecimal.valueOf(254.0), 5000000.0, 5000000.0, true));
+				BigDecimal.valueOf(1470.0), BigDecimal.valueOf(254.0), 5.0, 5.0, true));
 		Material tinta_verniz = this.materialService.salvar(new Material(null, "TINTA VERNIZ",
 				TipoMetrico.L, TipoMetrico.ML, TipoMetrico.L.getValor() / TipoMetrico.ML.getValor(),
 				BigDecimal.valueOf(24.5), BigDecimal.valueOf(5.0), BigDecimal.valueOf(110.0), 5,
@@ -114,7 +114,7 @@ public class DBService {
 		this.loteMaterialService.salvar(new LoteMaterialForm(null, tinta_verniz.getId(),
 				LocalDateTime.of(LocalDate.of(2022, 1, 6), LocalTime.of(8, 0)),
 				LocalDateTime.of(LocalDate.of(2022, 1, 1), LocalTime.of(8, 0)),
-				BigDecimal.valueOf(740.0), BigDecimal.valueOf(24.5), 30000.0, 30000.0, true));
+				BigDecimal.valueOf(740.0), BigDecimal.valueOf(24.5), 3.0, 3.0, true));
 		Material embuia = this.materialService.salvar(new Material(null, "EMBUIA", TipoMetrico.M3,
 				TipoMetrico.CM3, TipoMetrico.M3.getValor() / TipoMetrico.CM3.getValor(),
 				BigDecimal.valueOf(142.0), BigDecimal.valueOf(55.0), BigDecimal.valueOf(155.0), 10,
@@ -122,7 +122,7 @@ public class DBService {
 		this.loteMaterialService.salvar(new LoteMaterialForm(null, embuia.getId(),
 				LocalDateTime.of(LocalDate.of(2022, 1, 11), LocalTime.of(8, 0)),
 				LocalDateTime.of(LocalDate.of(2022, 1, 1), LocalTime.of(8, 0)),
-				BigDecimal.valueOf(481.0), BigDecimal.valueOf(142.0), 3000000.0, 3000000.0, true));
+				BigDecimal.valueOf(481.0), BigDecimal.valueOf(142.0), 3.0, 3.0, true));
 		Material parafuso = this.materialService.salvar(new Material(null, "PARAFUSO",
 				TipoMetrico.CE, TipoMetrico.UN,
 				TipoMetrico.CE.getValor() / TipoMetrico.UN.getValor(), BigDecimal.valueOf(5.2),
@@ -130,7 +130,7 @@ public class DBService {
 		this.loteMaterialService.salvar(new LoteMaterialForm(null, parafuso.getId(),
 				LocalDateTime.of(LocalDate.of(2022, 1, 6), LocalTime.of(8, 0)),
 				LocalDateTime.of(LocalDate.of(2022, 1, 1), LocalTime.of(8, 0)),
-				BigDecimal.valueOf(157.0), BigDecimal.valueOf(5.2), 3000.0, 3000.0, true));
+				BigDecimal.valueOf(157.0), BigDecimal.valueOf(5.2), 30.0, 30.0, true));
 
 		// Produtos
 		Produto peCadeiraCortado = this.produtoService.salvar(new Produto(null,

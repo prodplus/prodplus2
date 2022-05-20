@@ -1,4 +1,5 @@
 import { toDateApi } from 'src/app/shared/date-utils';
+import { LoteMaterial } from '../lote-material';
 
 export class LoteMaterialForm {
   id: number | null;
@@ -12,6 +13,7 @@ export class LoteMaterialForm {
   ativo: boolean;
 
   constructor();
+  constructor(lote: LoteMaterial);
   constructor(
     material: number,
     pedido: string,
@@ -34,6 +36,17 @@ export class LoteMaterialForm {
       this.quantInicial = 0;
       this.quantAtual = 0;
       this.ativo = true;
+    } else if (args.length == 1) {
+      const loteI: LoteMaterial = args[0];
+      this.id = loteI.id;
+      this.entrada = loteI.entrada;
+      this.material = loteI.material.id != null ? loteI.material.id : 0;
+      this.pedido = loteI.pedido;
+      this.custoTotal = loteI.custoTotal;
+      this.custoUnitario = loteI.custoUnitario;
+      this.quantInicial = loteI.quantInicial;
+      this.quantAtual = loteI.quantAtual;
+      this.ativo = loteI.ativo;
     } else {
       this.material = args[0];
       this.pedido = args[1];
