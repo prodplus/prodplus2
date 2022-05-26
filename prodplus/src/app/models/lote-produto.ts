@@ -7,5 +7,6 @@ export interface LoteProduto {
   producao: string;
   custoTotal: number;
   quantInicial: number;
+  quantAtual: number;
   ativo: boolean;
 }

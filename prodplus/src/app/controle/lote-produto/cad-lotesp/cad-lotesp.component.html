@@ -1,0 +1,66 @@
+<h2 class="titulo">Lotes de Produto</h2>
+<mat-spinner *ngIf="isLoading" class="spinner-geral"></mat-spinner>
+<div class="card mat-elevation-z10">
+  <div class="card-header">
+    <div class="card-title">Cadastro de Lotes</div>
+    <div class="card-subtitle">
+      <button class="btn btn-danger" type="button"
+          [routerLink]="['/controle/lotes-produto']">
+        cancelar
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="salvar()">
+      <div class="row col-12 mb-3">
+        <div class="col-5">
+          <label for="inputProduto" class="form-label">Produto:</label>
+          <input type="text" id="inputProduto" formControlName="produto"
+              [matAutocomplete]="auto" class="form-control" required #input>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let prod of produtos" [value]="prod.descricao"
+                (onSelectionChange)="onSelectProduto($event.source.value)">
+              {{ prod.descricao }}
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+        <div class="col-2" *ngIf="this.loteForm?.produto">
+          <button class="btn btn-warning" style="margin-top: 32px;" type="button"
+              (click)="resetProduto()">
+            desfazer
+          </button>
+        </div>
+      </div>
+      <div class="col-4 mb-3">
+        <label for="inputProducao" class="form-label">Produção:</label>
+        <input type="datetime-local" id="inputProducao" [ngClass]="onBlurInput('producao')"
+            formControlName="producao">
+      </div>
+      <div class="row col-12 mb-3">
+        <div class="col-3">
+          <label for="inputInicial" class="form-label">Quant. inicial:</label>
+          <input type="text" [ngClass]="onBlurInput('quantInicial')"
+              id="inputInicial" formControlName="quantInicial" mask="0*,00"
+              style="text-align: center;" [suffix]="getTipoMetricoDesc()"
+              (blur)="onBlurQuantInicial()">
+        </div>
+        <div class="col-3">
+          <label for="inputAtual" class="form-label">Quant. atual:</label>
+          <input type="text" [ngClass]="onBlurInput('quantAtual')" id="inputAtual"
+              formControlName="quantAtual" mask="0*,00" style="text-align: center;"
+              [suffix]="getTipoMetricoDesc()">
+        </div>
+        <div class="col-3">
+          <label for="inputCusto" class="form-label">Custo total:</label>
+          <input currencyMask id="inputCusto" [ngClass]="onBlurInput('custoTotal')"
+              formControlName="custoTotal">
+        </div>
+      </div>
+      <div class="gap-1 d-grid">
+        <button class="btn btn-success btn-lg" [disabled]="form.invalid">
+          salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
